@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-beta.26/dc.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dc/2.0.0-beta.26/dc.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
+
 <body>
-
-
-<!-- title row -->
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12 dc-data-count dc-chart" id="data-count">
-      <h2>Reported sightings of pet lemurs in Madagascar
+    <!-- title row -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 dc-data-count dc-chart" id="data-count">
+                <h2>Reported sightings of pet lemurs in Madagascar
         <small>
           <span class="filter-count"></span> selected out of <span class="total-count"></span> records |
            <a id="all" href="#">Reset All</a>
@@ -65,12 +65,12 @@
     </div>
     <!-- <div class="col-xs-6 col-md-4"> -->
     <div class="col-md-4">
-    <h4>Map:  Regions <small><a id="" href="#">reset</a></small></h4>
-      <div id="chart_row_admin1"></div>
+    <h4>Map:  Regions <small><a id="admin2_map" href="#">reset</a></small></h4>
       <div id="map_admin2"></div>
     </div>
     <!-- <div class="col-xs-6 col-md-4"> -->
     <div class="col-md-4">
+    <h4>Map:  Provinces <small><a id="admin1_map" href="#">reset</a></small></h4>
       <div id="map_admin1"></div>
     </div>
   </div>
@@ -99,12 +99,14 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
+	<script src="js/topojson.v1.min.js"></script>
 
 <script>
 
 var admin2_KV, 
 		admin1_KV,
-		lemur_category_KV
+		lemur_category_KV,
+		admin1Geojson
 
 	// var map = L.map('map');
 	// var breweryMarkers = new L.FeatureGroup();
@@ -184,10 +186,10 @@ var admin2_KV,
 			d.when_seen_dt = fullDateFormat.parse(d.month_and_year);
 			d.when_seen_year = +yearFormat(d.when_seen_dt);
 			d.when_seen_month = monthFormat(d.when_seen_dt);
-			d.location_admin1 = admin1_KV[d.location_admin1];
-			// d.location_admin1 = d.location_admin1;
-			d.location_admin2 = admin2_KV[d.location_admin2];
-			// d.location_admin2 = admin2_KV[d.location_admin2];
+			d.location_admin1_chart = admin1_KV[d.location_admin1];
+			d.location_admin1_map = d.location_admin1;
+			d.location_admin2_chart = admin2_KV[d.location_admin2];
+			d.location_admin2_map = d.location_admin2_chart
 		});
 
 		//set crossfilter
@@ -199,8 +201,12 @@ var admin2_KV,
 				//dc.pluck:  short hand for same kind of anonymous function we used for yearDim
 				monthDim = ndx.dimension(dc.pluck('when_seen_month')),
 				categoryNameDim = ndx.dimension(function(d) {return d.categoryName;}),
-				admin1Dim = ndx.dimension(function(d) {return d.location_admin1}),
-				admin2Dim = ndx.dimension(function(d) {return d.location_admin2})
+				admin1ChartDim = ndx.dimension(function(d) {return d.location_admin1_chart}),
+				admin2ChartDim = ndx.dimension(function(d) {return d.location_admin2_chart})
+				admin1MapDim = ndx.dimension(function(d) {return d.location_admin1_map}),
+				admin2MapDim = ndx.dimension(function(d) {return d.location_admin2_map})
+				
+
 				allDim = ndx.dimension(function(d) {return d;});
 
 
@@ -209,9 +215,10 @@ var admin2_KV,
 		var countPerYear = yearDim.group().reduceCount(),
 				countPerMonth = monthDim.group().reduceCount(),
 				categoryGroup = categoryNameDim.group().reduceCount()
-				admin1Group = admin1Dim.group().reduceCount()
-				admin2Group = admin2Dim.group().reduceCount()
-
+				admin1ChartGroup = admin1ChartDim.group().reduceCount()
+				admin2ChartGroup = admin2ChartDim.group().reduceCount()
+				admin1MapGroup = admin1MapDim.group().reduceCount()
+				admin2MapGroup = admin2MapDim.group().reduceCount();
 				// countPerDay = dayOfWeekDim.group().reduceCount(),
 				// countPerRating = ratingDim.group().reduceCount(),
 				// countPerCommRating = commRatingDim.group().reduceCount(),
@@ -224,11 +231,47 @@ var admin2_KV,
 				categoryChart = dc.rowChart("#chart_row_category")
 				admin1Chart = dc.rowChart("#chart_row_admin1")
 				admin2Chart = dc.rowChart("#chart_row_admin2")
+				admin1Map = dc.geoChoroplethChart("#map_admin1");
+				admin2Map = dc.geoChoroplethChart("#map_admin2");
 				dataCount = dc.dataCount('#data-count'),
 				dataTable = dc.dataTable('#data-table');
 
-		////chart configuration
 
+		d3.json("data/mdg-output_20160703-1600.json", function(polygons) {
+
+			admin1Geojson = topojson.feature(polygons, polygons.objects.mdg_adm1);
+			admin2Geojson = topojson.feature(polygons, polygons.objects.mdg_adm2);
+		// });
+
+			admin2Map
+			.width(150)
+			.height(450)
+			.dimension(admin2MapDim)
+			.group(admin2MapGroup)
+			.overlayGeoJson(admin2Geojson, "mdg_adm2",
+				function(d) {
+					return d.properties.code;
+				})
+			// .title(function(d){
+			// })
+
+			admin1Map
+				.width(150)
+				.height(450)
+				.dimension(admin1MapDim)
+				.group(admin1MapGroup)
+				.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+        .colorDomain([0, 200])
+        .colorCalculator(function (d) { return d ? admin1Map.colors()(d) : '#ccc'; })
+				.overlayGeoJson(admin1Geojson.features, "mdg_adm1",
+					function(d) {
+						return d.properties.code;
+					})
+				// .title(function(d){
+				// })
+
+
+		////chart configuration
 		//circle charts
 		yearChart
 			.width(150)
@@ -262,8 +305,8 @@ var admin2_KV,
 		admin1Chart
 			.width(300)
 			.height(150)
-			.dimension(admin1Dim)
-			.group(admin1Group)
+			.dimension(admin1ChartDim)
+			.group(admin1ChartGroup)
 			.elasticX(true)
 			.margins({top: 10, left: 20, right: 10, bottom: 20})
 			// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
@@ -274,12 +317,11 @@ var admin2_KV,
 				return order[d.key];
 			});
 
-
 		admin2Chart
 			.width(300)
 			.height(150)
-			.dimension(admin2Dim)
-			.group(admin2Group)
+			.dimension(admin2ChartDim)
+			.group(admin2ChartGroup)
 			.elasticX(true)
 			.margins({top: 10, left: 20, right: 10, bottom: 20})
 			.ordering(function(d){
@@ -288,42 +330,6 @@ var admin2_KV,
 				};
 				return order[d.key];
 			});
-
-			
-
-
-
-			// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
-
-		// dayChart
-		// 	.width(150)
-		// 	.height(150)
-		// 	.dimension(dayOfWeekDim)
-		// 	.group(countPerDay)
-		// 	.innerRadius(20)
-		// 	.ordering(function(d) {
-		// 		var order = {
-		// 			'Mon':0,'Tue':1,'Wed':2,'Thu':3,'Fri':4,'Sat':5,'Sun':6
-		// 		}
-		// 		return order[d.key];
-		// 	});
-
-		//bar charts
-		// ratingCountChart
-		// 	.width(300)
-		// 	.height(180)
-		// 	.dimension(ratingDim)
-		// 	.group(countPerRating)
-		// 	.x(d3.scale.linear().domain([0,5.2]))
-		// 	.elasticY(true)
-		// 	.centerBar(true)
-		// 	.barPadding(5)
-		// 	.xAxisLabel('My rating')
-		// 	.yAxisLabel('Count')
-		// 	.margins({top: 10, right: 20, bottom: 50, left: 50});
-		// ratingCountChart.xAxis().tickValues([0,1,2,3,4,5]);
-
-		//etc.
 
 
 		dataCount
@@ -339,8 +345,8 @@ var admin2_KV,
 				function (d) { return d.month_and_year; },
 				function (d) { return d.lemur_category; },
 				function (d) { return d.lemurs_quantity; },
-				function (d) { return d.location_admin1; },
-				function (d) { return d.location_admin2; },
+				function (d) { return d.location_admin1_chart; },
+				function (d) { return d.location_admin2_chart; },
 			])
 			.sortBy(function (d) { return d.month_and_year; })
 			.order(d3.descending)
@@ -386,14 +392,23 @@ var admin2_KV,
 			categoryChart.filterAll();
 			dc.redrawAll();
 		});
+		d3.selectAll('a#admin2_map').on('click', function() {
+			categoryChart.filterAll();
+			dc.redrawAll();
+		});
+		d3.selectAll('a#admin1_map').on('click', function() {
+			categoryChart.filterAll();
+			dc.redrawAll();
+		});
 
 
 
 		dc.renderAll();
-		d3.select(self.frameElement).style("height", height + "px");
+		// d3.select(self.frameElement).style("height", height + "px");
 
 	});
 
+});
 </script>
 
 	
