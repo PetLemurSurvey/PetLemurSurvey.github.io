@@ -41,12 +41,12 @@
       <div id="DELETE_ME7                                                                	" class="dc-chart"></div>
     </div> -->
     <div class="col-xs-4">
-      <h4>Regions</h4>
-      <div id="regions_bar"></div>
+      <h4>Regions <small><a id="admin2_chart" href="#">reset</a></small></h4>
+      <div id="chart_row_admin2"></div>
     </div>
 		<div class="col-xs-4">
-      <h4>Provinces</h4>
-      <div id="provinces_bar"></div>
+      <h4>Provinces <small><a id="admin1_chart" href="#">reset</a></small></h4>
+      <div id="chart_row_admin1"></div>
     </div>
 		<!-- 
     <div class="col-xs-6">
@@ -59,30 +59,33 @@
   <!-- categories, and maps (admin2 and admin1) -->
   <div class="row">
     <div class="col-md-4">
+    <h4>Category <small><a id="category" href="#">reset</a></small></h4>
     <!-- <div class="col-xs-6 col-md-4"> -->
-      <div class="dc-chart" id="categories_chart"></div>
+      <div class="dc-chart" id="chart_row_category"></div>
     </div>
     <!-- <div class="col-xs-6 col-md-4"> -->
     <div class="col-md-4">
-      <div id="regions_map"></div>
+    <h4>Map:  Regions <small><a id="" href="#">reset</a></small></h4>
+      <div id="chart_row_admin1"></div>
+      <div id="map_admin2"></div>
     </div>
     <!-- <div class="col-xs-6 col-md-4"> -->
     <div class="col-md-4">
-      <div id="provinces_map"></div>
+      <div id="map_admin1"></div>
     </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-xs-12">
+    <h4>Source Data</h4>
       <table class="table table-bordered table-striped" id="data-table">
         <thead>
           <tr class="header">
-            <th>Brewery</th>
-            <th>Beer</th>
-            <th>Style</th>
-            <th>My Rating</th>
-            <th>Community Rating</th>
-            <th>ABV %</th>
-            <th>IBU</th>
+            <th>Month and Year</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Region</th>
+            <th>Province</th>
           </tr>
         </thead>
       </table>
@@ -99,71 +102,128 @@
 
 <script>
 
-	var map = L.map('map');
-	var breweryMarkers = new L.FeatureGroup();
+var admin2_KV, 
+		admin1_KV,
+		lemur_category_KV
 
-	L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 19,
-		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-		}).addTo(map);
+	// var map = L.map('map');
+	// var breweryMarkers = new L.FeatureGroup();
+
+	// L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	// 	maxZoom: 19,
+	// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	// 	}).addTo(map);
 
 
-	d3.json('/data/lemurSample_20160701-1505.json', function(error, data) {
+	d3.json('data/lemurSample_20160702-0104_noNulls.json', function(error, data) {
+
+		// key/values for codes returned from API source
+		admin2_KV = {
+			"alaotra-mangoro":"Alaotra-Mangoro",
+			"amoron.i_mania":"Amoron'I Mania",
+			"analamanga":"Analamanga",
+			"analanjirofo":"Analanjirofo",
+			"androy":"Androy",
+			"anosy":"Anosy",
+			"atsimo-andrefana":"Atsimo-Andrefana",
+			"atsimo-atsinanana":"Atsimo-Atsinanana",
+			"atsinanana":"Atsinanana",
+			"betsiboka":"Betsiboka",
+			"boeny":"Boeny",
+			"bongolava":"Bongolava",
+			"diana":"Diana",
+			"haute_matsiatra":"Haute Matsiatra",
+			"ihorombe":"Ihorombe",
+			"itasy":"Itasy",
+			"melaky":"Melaky",
+			"menabe":"Menabe",
+			"sava":"Sava",
+			"sofia":"Sofia",
+			"vakinankaratra":"Vakinankaratra",
+			"vatovavy-fitovinany":"Vatovavy-Fitovinany",
+			"noData":"No Data",
+			"other":"Other"
+		};
+
+		admin1_KV = {
+			"antananarivo":"Antananarivo",
+			"antsiranana":"Antsiranana",
+			"fianarantsoa":"Fianarantsoa",
+			"mahajanga":"Mahajanga",
+			"toamasina":"Toamasina",
+			"toliara":"Toliara",
+			"other":"Other"
+		}
+
+		lemur_category_KV = {
+			"aye_aye":"Aye Aye",
+			"bamboo_lemur":"Bamboo lemur",
+			"brown_lemur":"Brown lemur",
+			"dwarf_lemur":"Dwarf lemur",
+			"fork_marked_lemur":"Fork marked lemur",
+			"giant_mouse_lemurs":"Giant mouse lemurs",
+			"greater_bamboo_lemur":"Greater bamboo lemur",
+			"indri":"Indri",
+			"mouse_lemur":"Mouse lemur",
+			"ring-tailed_lemur":"Ring-tailed lemur",
+			"ruffed_lemurs":"Ruffed lemurs",
+			"sifaka":"Sifaka",
+			"sportive_lemur":"Sportive lemur",
+			"woolly_lemur":"Woolly lemur",
+		}
 		var lemurData = data.kobo_data;
-
-		var fullDateFormat = d3.time.format('%a, %d %b %Y %X %Z');
+		var fullDateFormat = d3.time.format('%Y-%m-%d');
 		var yearFormat = d3.time.format('%Y');
 		var monthFormat = d3.time.format('%b'); 
-		// var dayOfWeekFormat = d3.time.format('%a');
 
 		//normalize/parse data so dc can coorrectly sort and bin them
 		lemurData.forEach(function(d) {
 			d.count = +d.count;
-			//round to nearest 0.25
-			d.rating_score = Math.round(+d.rating_score * 4) / 4;
-			d.beer.rating_score = Math.round(+d.beer.rating_score * 4) / 4;
-			//round to nearest 0.5
-			d.beer.beer_abv = Math.round(+d.beer.beer_abv * 2) / 2;
-			//round to nearest 10
-			d.beer.beer_ibu = Math.floor(+d.beer.beer_ibu / 10) * 10;
-			d.first_had_dt = fullDateFormat.parse(d.first_had);
-			d.first_had_year = +yearFormat(d.first_had_dt);
-			d.first_had_month = monthFormat(d.first_had_dt);
-			d.first_had_day = dayOfWeekFormat(d.first_had_dt);
+			d.lemurs_quantity = d.lemurs_quantity;
+			d.categoryName = lemur_category_KV[d.lemur_category];
+			d.when_seen_dt = fullDateFormat.parse(d.month_and_year);
+			d.when_seen_year = +yearFormat(d.when_seen_dt);
+			d.when_seen_month = monthFormat(d.when_seen_dt);
+			d.location_admin1 = admin1_KV[d.location_admin1];
+			// d.location_admin1 = d.location_admin1;
+			d.location_admin2 = admin2_KV[d.location_admin2];
+			// d.location_admin2 = admin2_KV[d.location_admin2];
 		});
 
 		//set crossfilter
 		var ndx = crossfilter(lemurData);
 
 		//create dimensions (x-axis values)
-		var yearDim = ndx.dimension(function(d) {return d.first_had_year;}),
-		//dc.pluck:  short hand for same kind of anonymous function we used for yearDim
-				monthDim = ndx.dimension(dc.pluck('first_had_month')),
-				dayOfWeekDim = ndx.dimension(dc.pluck('first_had_day')),
-				ratingDim = ndx.dimension(dc.pluck('rating_score')),
-				commRatingDim = ndx.dimension(function(d) {return d.beer.rating_score;}),
-				abvDim = ndx.dimension(function(d) {return d.beer.beer_abv;}),
-				ibuDim = ndx.dimension(function(d) {return d.beer.beer_ibu;}),
+		var quantityDim = ndx.dimension(function(d) {return d.lemurs_quantity})
+				yearDim = ndx.dimension(function(d) {return d.when_seen_year;}),
+				//dc.pluck:  short hand for same kind of anonymous function we used for yearDim
+				monthDim = ndx.dimension(dc.pluck('when_seen_month')),
+				categoryNameDim = ndx.dimension(function(d) {return d.categoryName;}),
+				admin1Dim = ndx.dimension(function(d) {return d.location_admin1}),
+				admin2Dim = ndx.dimension(function(d) {return d.location_admin2})
 				allDim = ndx.dimension(function(d) {return d;});
+
 
 		//creating groups (y-axis values)
 		var all = ndx.groupAll();
 		var countPerYear = yearDim.group().reduceCount(),
 				countPerMonth = monthDim.group().reduceCount(),
-				countPerDay = dayOfWeekDim.group().reduceCount(),
-				countPerRating = ratingDim.group().reduceCount(),
-				countPerCommRating = commRatingDim.group().reduceCount(),
-				countPerABV = abvDim.group().reduceCount(),
-				countPerIBU = ibuDim.group().reduceCount();
+				categoryGroup = categoryNameDim.group().reduceCount()
+				admin1Group = admin1Dim.group().reduceCount()
+				admin2Group = admin2Dim.group().reduceCount()
+
+				// countPerDay = dayOfWeekDim.group().reduceCount(),
+				// countPerRating = ratingDim.group().reduceCount(),
+				// countPerCommRating = commRatingDim.group().reduceCount(),
+				// countPerABV = abvDim.group().reduceCount(),
+				// countPerIBU = ibuDim.group().reduceCount();
 
 		//creating charts
 		var yearChart = dc.pieChart('#chart-ring-year'),
 				monthChart = dc.pieChart('#chart-ring-month'),
-				dayChart = dc.pieChart('#DELETE_ME'),
-				ratingCountChart = dc.barChart('#categories_chart'),
-				commRatingCountChart = dc.barChart('#DELETE_ME'),
-				abvCountChart = dc.barChart('#DELETE_ME'),
-				ibuCountChart = dc.barChart('#DELETE_ME'),
+				categoryChart = dc.rowChart("#chart_row_category")
+				admin1Chart = dc.rowChart("#chart_row_admin1")
+				admin2Chart = dc.rowChart("#chart_row_admin2")
 				dataCount = dc.dataCount('#data-count'),
 				dataTable = dc.dataTable('#data-table');
 
@@ -190,6 +250,51 @@
 				return order[d.key];
 			});
 
+		categoryChart
+			.width(150)
+			.height(450)
+			.dimension(categoryNameDim)
+			.group(categoryGroup)
+			.elasticX(true)
+			.margins({top: 10, left: 20, right: 10, bottom: 20})
+			.xAxis().tickValues([0, 1, 2, 3, 4, 5]);
+
+		admin1Chart
+			.width(300)
+			.height(150)
+			.dimension(admin1Dim)
+			.group(admin1Group)
+			.elasticX(true)
+			.margins({top: 10, left: 20, right: 10, bottom: 20})
+			// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
+			.ordering(function(d){
+				var order = {			
+					"Antananarivo":1,"Antsiranana":2,"Fianarantsoa":3,"Mahajanga":4,"Toamasina":5,"Toliara":6,"Other":7
+				};
+				return order[d.key];
+			});
+
+
+		admin2Chart
+			.width(300)
+			.height(150)
+			.dimension(admin2Dim)
+			.group(admin2Group)
+			.elasticX(true)
+			.margins({top: 10, left: 20, right: 10, bottom: 20})
+			.ordering(function(d){
+				var order = {			
+					"Alaotra-Mangoro":1,"Amoron'I Mania":2,"Analamanga":3,"Analanjirofo":4,"Androy":5,"Anosy":6,"Atsimo-Andrefana":7,"Atsimo-Atsinanana":8,"Atsinanana":9,"Betsiboka":10,"Boeny":11,"Bongolava":12,"Diana":13,"Haute Matsiatra":14,"Ihorombe":15,"Itasy":16,"Melaky":17,"Menabe":18,"Sava":19,"Sofia":20,"Vakinankaratra":21,"Vatovavy-Fitovinany":22,"No Data":23, "Other":24
+				};
+				return order[d.key];
+			});
+
+			
+
+
+
+			// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
+
 		// dayChart
 		// 	.width(150)
 		// 	.height(150)
@@ -204,60 +309,22 @@
 		// 	});
 
 		//bar charts
-		ratingCountChart
-			.width(300)
-			.height(180)
-			.dimension(ratingDim)
-			.group(countPerRating)
-			.x(d3.scale.linear().domain([0,5.2]))
-			.elasticY(true)
-			.centerBar(true)
-			.barPadding(5)
-			.xAxisLabel('My rating')
-			.yAxisLabel('Count')
-			.margins({top: 10, right: 20, bottom: 50, left: 50});
-		ratingCountChart.xAxis().tickValues([0,1,2,3,4,5]);
+		// ratingCountChart
+		// 	.width(300)
+		// 	.height(180)
+		// 	.dimension(ratingDim)
+		// 	.group(countPerRating)
+		// 	.x(d3.scale.linear().domain([0,5.2]))
+		// 	.elasticY(true)
+		// 	.centerBar(true)
+		// 	.barPadding(5)
+		// 	.xAxisLabel('My rating')
+		// 	.yAxisLabel('Count')
+		// 	.margins({top: 10, right: 20, bottom: 50, left: 50});
+		// ratingCountChart.xAxis().tickValues([0,1,2,3,4,5]);
 
-		commRatingCountChart
-			.width(300)
-			.height(180)
-			.dimension(commRatingDim)
-			.group(countPerCommRating)
-			.x(d3.scale.linear().domain([0,5.2]))
-			.elasticY(true)
-			.centerBar(true)
-			.barPadding(5)
-			.xAxisLabel('Community rating')
-			.yAxisLabel('Count')
-			.margins({top:10, right: 20, bottom: 50, left: 50});
-			commRatingCountChart.xAxis().tickValues([0,1,2,3,4,5]);
+		//etc.
 
-		abvCountChart
-			.width(300)
-			.height(180)
-			.dimension(abvDim)
-			.group(countPerABV)
-			.x(d3.scale.linear().domain([-9.2, d3.max(lemurData, function(d) {return d.beer.beer_abv; }) + 0.2]))
-			.elasticY(true)
-			.centerBar(true)
-			.barPadding(2)
-			.xAxisLabel('Alcohol By Volume (%)')
-			.yAxisLabel('Count')
-			.margins({top:10, right:20, bottom:50, left:50});
-
-		ibuCountChart
-			.width(300)
-			.height(180)
-			.dimension(ibuDim)
-			.group(countPerIBU)
-			.x(d3.scale.linear().domain([-2, d3.max(lemurData, function(d){return d.beer.beer_ibu; }) +2]))
-			.elasticY(true)
-			.centerBar(true)
-			.barPadding(5)
-			.xAxisLabel('International Bitterness Units')
-			.yAxisLabel('Count')
-			.xUnits(function(d){ return 5;})
-			.margins({top:10, right:20, bottom:50, left:50});
 
 		dataCount
 			.dimension(ndx)
@@ -269,31 +336,29 @@
 			.group(function (d) { return 'dc.js insists on putting a row here so I remove it using js'; })
 			.size(100)
 			.columns([
-				function (d) { return d.brewery.brewery_name; },
-				function (d) { return d.beer.beer_name; },
-				function (d) { return d.beer.beer_style; },
-				function (d) { return d.rating_score; },
-				function (d) { return d.beer.rating_score; },
-				function (d) { return d.beer.beer_abv; },
-				function (d) { return d.beer.beer_ibu; },
+				function (d) { return d.month_and_year; },
+				function (d) { return d.lemur_category; },
+				function (d) { return d.lemurs_quantity; },
+				function (d) { return d.location_admin1; },
+				function (d) { return d.location_admin2; },
 			])
-			.sortBy(function (d) { return d.rating_score; })
+			.sortBy(function (d) { return d.month_and_year; })
 			.order(d3.descending)
 			.on('renderlet', function (table) {
 				//each time table is rendered remove extra row dc.js insists on adding
 				table.select('tr.dc-table-group').remove();
 
 		// Map markers
-	      breweryMarkers.clearLayers();
-	      _.each(allDim.top(Infinity), function (d) {
-	        var loc = d.brewery.location;
-	        var name = d.brewery.brewery_name;
-	        var marker = L.marker([loc.lat, loc.lng]);
-	        marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
-	        breweryMarkers.addLayer(marker);
-	      });
-	      map.addLayer(breweryMarkers);
-	      map.fitBounds(breweryMarkers.getBounds());
+	      // breweryMarkers.clearLayers();
+	      // _.each(allDim.top(Infinity), function (d) {
+	      //   var loc = d.brewery.location;
+	      //   var name = d.brewery.brewery_name;
+	      //   var marker = L.marker([loc.lat, loc.lng]);
+	      //   marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
+	      //   breweryMarkers.addLayer(marker);
+	      // });
+	      // map.addLayer(breweryMarkers);
+	      // map.fitBounds(breweryMarkers.getBounds());
 	    });
 
 
@@ -301,24 +366,30 @@
 			dc.filterAll();
 			dc.renderAll();
 		});
-
 		d3.selectAll('a#year').on('click', function() {
 			yearChart.filterAll();
 			dc.redrawAll();
 		});
-
 		d3.selectAll('a#month').on('click', function() {
 			monthChart.filterAll();
 			dc.redrawAll();
 		});
-
-		d3.selectAll('a#day').on('click', function() {
-			dayChart.filterAll();
+		d3.selectAll('a#admin2_chart').on('click', function() {
+			admin2Chart.filterAll();
+			dc.redrawAll();
+		});
+		d3.selectAll('a#admin1_chart').on('click', function() {
+			admin1Chart.filterAll();
+			dc.redrawAll();
+		});
+		d3.selectAll('a#category').on('click', function() {
+			categoryChart.filterAll();
 			dc.redrawAll();
 		});
 
-		dc.renderAll();
 
+
+		dc.renderAll();
 		d3.select(self.frameElement).style("height", height + "px");
 
 	});
