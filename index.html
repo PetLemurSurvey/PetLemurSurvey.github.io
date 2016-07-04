@@ -118,6 +118,7 @@ var admin2_KV,
 
 
 	d3.json('data/lemurSample_20160702-0104_noNulls.json', function(error, data) {
+		
 
 		// key/values for codes returned from API source
 		admin2_KV = {
@@ -146,7 +147,6 @@ var admin2_KV,
 			"noData":"No Data",
 			"other":"Other"
 		};
-
 		admin1_KV = {
 			"antananarivo":"Antananarivo",
 			"antsiranana":"Antsiranana",
@@ -156,7 +156,6 @@ var admin2_KV,
 			"toliara":"Toliara",
 			"other":"Other"
 		}
-
 		lemur_category_KV = {
 			"aye_aye":"Aye Aye",
 			"bamboo_lemur":"Bamboo lemur",
@@ -203,10 +202,8 @@ var admin2_KV,
 				categoryNameDim = ndx.dimension(function(d) {return d.categoryName;}),
 				admin1ChartDim = ndx.dimension(function(d) {return d.location_admin1_chart}),
 				admin2ChartDim = ndx.dimension(function(d) {return d.location_admin2_chart})
-				admin1MapDim = ndx.dimension(function(d) {return d.location_admin1_map}),
-				admin2MapDim = ndx.dimension(function(d) {return d.location_admin2_map})
-				
-
+				admin1MapDim = ndx.dimension(function(d) {return d.location_admin1_map})
+				// admin2MapDim = ndx.dimension(function(d) {return d.location_admin2_map})
 				allDim = ndx.dimension(function(d) {return d;});
 
 
@@ -218,12 +215,7 @@ var admin2_KV,
 				admin1ChartGroup = admin1ChartDim.group().reduceCount()
 				admin2ChartGroup = admin2ChartDim.group().reduceCount()
 				admin1MapGroup = admin1MapDim.group().reduceCount()
-				admin2MapGroup = admin2MapDim.group().reduceCount();
-				// countPerDay = dayOfWeekDim.group().reduceCount(),
-				// countPerRating = ratingDim.group().reduceCount(),
-				// countPerCommRating = commRatingDim.group().reduceCount(),
-				// countPerABV = abvDim.group().reduceCount(),
-				// countPerIBU = ibuDim.group().reduceCount();
+				// admin2MapGroup = admin2MapDim.group().reduceCount();
 
 		//creating charts
 		var yearChart = dc.pieChart('#chart-ring-year'),
@@ -232,38 +224,39 @@ var admin2_KV,
 				admin1Chart = dc.rowChart("#chart_row_admin1")
 				admin2Chart = dc.rowChart("#chart_row_admin2")
 				admin1Map = dc.geoChoroplethChart("#map_admin1");
-				admin2Map = dc.geoChoroplethChart("#map_admin2");
+				// admin2Map = dc.geoChoroplethChart("#map_admin2");
 				dataCount = dc.dataCount('#data-count'),
 				dataTable = dc.dataTable('#data-table');
 
 
-		d3.json("data/mdg-output_20160703-1600.json", function(polygons) {
 
-			admin1Geojson = topojson.feature(polygons, polygons.objects.mdg_adm1);
-			admin2Geojson = topojson.feature(polygons, polygons.objects.mdg_adm2);
-		// });
+		d3.json("data/MDG_adm1.json", function(featuresJSON) {
+			console.log(featuresJSON.features)
+			var width = 300;
+			var height = 450
+			var projection = d3.geo.mercator();
+			var path = d3.geo.path().projection(projection);
+			
 
-			admin2Map
-			.width(150)
-			.height(450)
-			.dimension(admin2MapDim)
-			.group(admin2MapGroup)
-			.overlayGeoJson(admin2Geojson, "mdg_adm2",
-				function(d) {
-					return d.properties.code;
-				})
-			// .title(function(d){
-			// })
+			//set up scale and translate
+			var bounds, scale, offset;
+			projection.scale(1).translate([0,0]);
+			var bounds = path.bounds(featuresJSON);
+			var scale = .90 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
+			var offset = [(width - scale * (bounds[1][0] + bounds[0][0])) /2, (height - scale * (bounds[1][1] + bounds[0][1])) /2 ]; 
+			projection.scale(scale).translate(offset);
+
 
 			admin1Map
-				.width(150)
-				.height(450)
+				.width(width)
+				.height(height)
 				.dimension(admin1MapDim)
 				.group(admin1MapGroup)
 				.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
         .colorDomain([0, 200])
         .colorCalculator(function (d) { return d ? admin1Map.colors()(d) : '#ccc'; })
-				.overlayGeoJson(admin1Geojson.features, "mdg_adm1",
+				.projection(projection)
+				.overlayGeoJson(featuresJSON.features, "mdg_adm1",
 					function(d) {
 						return d.properties.code;
 					})
