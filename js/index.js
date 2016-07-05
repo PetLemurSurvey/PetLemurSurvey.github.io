@@ -12,9 +12,122 @@ var admin2_KV,
 	// 	}).addTo(map);
 
 
-	d3.json('data/lemurSample_20160705-0137.json', function(error, data) {
+	d3.json('data/lemurSample_20160705-2347.json', function(error, data) {
 
 		// key/values for codes returned from API source
+		month_KV = {
+			"no_response":"No response",
+			"i_dont_know":"I dont know",
+			"january":"Jan",
+			"february":"Feb",
+			"march":"Mar",
+			"april":"Apr",
+			"may":"May",
+			"june":"Jun",
+			"july":"July",
+			"august":"Aug",
+			"september":"Sept",
+			"october":"Oct",
+			"november":"Nov",
+			"december":"Dec"
+		};
+		year_KV = {
+			"no_response":"No response",
+			"i_dont_know":"I don't know",
+			"2016":"2016",
+			"2015":"2015",
+			"2014":"2014",
+			"2013":"2013",
+			"2012":"2012",
+			"2011":"2011",
+			"2010":"2010",
+			"2009":"2009",
+			"2008":"2008",
+			"2007":"2007",
+			"2006":"2006",
+			"2005":"2005",
+			"2004":"2004",
+			"2003":"2003",
+			"2002":"2002",
+			"2001":"2001",
+			"2000":"2000",
+			"1999":"1999",
+			"1998":"1998",
+			"1997":"1997",
+			"1996":"1996",
+			"1995":"1995",
+			"1994":"1994",
+			"1993":"1993",
+			"1992":"1992",
+			"1991":"1991",
+			"1990":"1990",
+			"1989":"1989",
+			"1988":"1988",
+			"1987":"1987",
+			"1986":"1986",
+			"1985":"1985",
+			"1984":"1984",
+			"1983":"1983",
+			"1982":"1982",
+			"1981":"1981",
+			"1980":"1980",
+			"1979":"1979",
+			"1978":"1978",
+			"1977":"1977",
+			"1976":"1976",
+			"1975":"1975",
+			"1974":"1974",
+			"1973":"1973",
+			"1972":"1972",
+			"1971":"1971",
+			"1970":"1970",
+			"1969":"1969",
+			"1968":"1968",
+			"1967":"1967",
+			"1966":"1966",
+			"1965":"1965",
+			"1964":"1964",
+			"1963":"1963",
+			"1962":"1962",
+			"1961":"1961",
+			"1960":"1960",
+			"before_1960":"before 1960",
+		};
+		quantity_KV = {
+			"no_answer":"No response",
+			"i_don_t_know":"I don't know",
+			"1":"1",
+			"2":"2",
+			"3":"3",
+			"4":"4",
+			"5":"5",
+			"6":"6",
+			"7":"7",
+			"8":"8",
+			"9":"9",
+			"10":"10",
+			"11":"11",
+			"12":"12",
+			"13":"13",
+			"14":"14",
+			"15":"15",
+			"16":"16",
+			"17":"17",
+			"18":"18",
+			"19":"19",
+			"20":"20",
+			"more_than_20":"21 or more"
+		}
+		admin1_KV = {
+			"antananarivo":"Antananarivo",
+			"antsiranana":"Antsiranana",
+			"fianarantsoa":"Fianarantsoa",
+			"mahajanga":"Mahajanga",
+			"toamasina":"Toamasina",
+			"toliara":"Toliara",
+			"other":"Other",
+			"no_response":"No response"
+		};
 		admin2_KV = {
 			"alaotra-mangoro":"Alaotra-Mangoro",
 			"amoron.i_mania":"Amoron'I Mania",
@@ -38,18 +151,9 @@ var admin2_KV,
 			"sofia":"Sofia",
 			"vakinankaratra":"Vakinankaratra",
 			"vatovavy-fitovinany":"Vatovavy-Fitovinany",
-			"noData":"No Data",
+			"no_response":"No response",
 			"other":"Other"
 		};
-		admin1_KV = {
-			"antananarivo":"Antananarivo",
-			"antsiranana":"Antsiranana",
-			"fianarantsoa":"Fianarantsoa",
-			"mahajanga":"Mahajanga",
-			"toamasina":"Toamasina",
-			"toliara":"Toliara",
-			"other":"Other"
-		}
 		lemur_category_KV = {
 			"aye_aye":"Aye Aye",
 			"bamboo_lemur":"Bamboo lemur",
@@ -65,7 +169,9 @@ var admin2_KV,
 			"sifaka":"Sifaka",
 			"sportive_lemur":"Sportive lemur",
 			"woolly_lemur":"Woolly lemur",
-			"I_dont_remembe":"Didn't Remember"
+			"I_dont_remembe":"I don't remember",
+			"no_response":"No response",
+			"other":"Other"
 		}
 		var lemurData = data.kobo_data;
 		var fullDateFormat = d3.time.format('%Y-%m-%d');
@@ -75,11 +181,13 @@ var admin2_KV,
 		//normalize/parse data so dc can coorrectly sort and bin them
 		lemurData.forEach(function(d) {
 			d.count = +d.count;
-			d.lemurs_quantity = d.lemurs_quantity;
+			d.lemurs_quantity = quantity_KV[d.lemurs_quantity];
 			d.categoryName = lemur_category_KV[d.lemur_category];
-			d.when_seen_dt = fullDateFormat.parse(d.month_and_year);
-			d.when_seen_year = yearFormat(d.when_seen_dt);
-			d.when_seen_month = monthFormat(d.when_seen_dt);
+			d.month = month_KV[d.month];
+			d.year = year_KV[d.year];
+			// d.when_seen_dt = fullDateFormat.parse(d.month_and_year);
+			// d.when_seen_year = yearFormat(d.when_seen_dt);
+			// d.when_seen_month = monthFormat(d.when_seen_dt);
 			d.location_admin1_chart = admin1_KV[d.location_admin1];
 			d.location_admin1_map = d.location_admin1;
 			d.location_admin2_chart = admin2_KV[d.location_admin2];
@@ -90,10 +198,12 @@ var admin2_KV,
 		var ndx = crossfilter(lemurData);
 
 		//create dimensions (x-axis values)
-		var quantityDim = ndx.dimension(function(d) {return d.lemurs_quantity})
-				yearDim = ndx.dimension(function(d) {return d.when_seen_year;}),
-				//dc.pluck:  short hand for same kind of anonymous function we used for yearDim
-				monthDim = ndx.dimension(dc.pluck('when_seen_month')),
+		var quantityDim = ndx.dimension(function(d) {return d.lemurs_quantity}),
+				// yearDim = ndx.dimension(function(d) {return d.when_seen_year;}),
+				// //dc.pluck:  short hand for same kind of anonymous function we used for yearDim
+				// monthDim = ndx.dimension(dc.pluck('when_seen_month')),
+				monthDim = ndx.dimension(function(d) {return d.month}),
+				yearDim = ndx.dimension(function(d) {return d.year}),
 				categoryNameDim = ndx.dimension(function(d) {return d.categoryName;}),
 				admin1ChartDim = ndx.dimension(function(d) {return d.location_admin1_chart}),
 				admin2ChartDim = ndx.dimension(function(d) {return d.location_admin2_chart})
@@ -206,7 +316,7 @@ var admin2_KV,
 
 				admin1Chart
 					.width(300)
-					.height(300)
+					.height(150)
 					.dimension(admin1ChartDim)
 					.group(admin1ChartGroup)
 					.elasticX(true)
@@ -214,21 +324,21 @@ var admin2_KV,
 					// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
 					.ordering(function(d){
 						var order = {			
-							"Antananarivo":1,"Antsiranana":2,"Fianarantsoa":3,"Mahajanga":4,"Toamasina":5,"Toliara":6,"Other":7
+							"Antananarivo":1,"Antsiranana":2,"Fianarantsoa":3,"Mahajanga":4,"Toamasina":5,"Toliara":6,"Other":7,"No response":8
 						};
 						return order[d.key];
 					});
 
 				admin2Chart
 					.width(300)
-					.height(300)
+					.height(150)
 					.dimension(admin2ChartDim)
 					.group(admin2ChartGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
 					.ordering(function(d){
 						var order = {			
-							"Alaotra-Mangoro":1,"Amoron'I Mania":2,"Analamanga":3,"Analanjirofo":4,"Androy":5,"Anosy":6,"Atsimo-Andrefana":7,"Atsimo-Atsinanana":8,"Atsinanana":9,"Betsiboka":10,"Boeny":11,"Bongolava":12,"Diana":13,"Haute Matsiatra":14,"Ihorombe":15,"Itasy":16,"Melaky":17,"Menabe":18,"Sava":19,"Sofia":20,"Vakinankaratra":21,"Vatovavy-Fitovinany":22,"No Data":23, "Other":24
+							"Alaotra-Mangoro":1,"Amoron'I Mania":2,"Analamanga":3,"Analanjirofo":4,"Androy":5,"Anosy":6,"Atsimo-Andrefana":7,"Atsimo-Atsinanana":8,"Atsinanana":9,"Betsiboka":10,"Boeny":11,"Bongolava":12,"Diana":13,"Haute Matsiatra":14,"Ihorombe":15,"Itasy":16,"Melaky":17,"Menabe":18,"Sava":19,"Sofia":20,"Vakinankaratra":21,"Vatovavy-Fitovinany":22,"No Data":23, "Other":24, "No response":25
 						};
 						return order[d.key];
 					});
@@ -244,7 +354,8 @@ var admin2_KV,
 					.group(function (d) { return 'dc.js insists on putting a row here so I remove it using js'; })
 					.size(100)
 					.columns([
-						function (d) { return d.month_and_year; },
+						function (d) { return d.month; },
+						function (d) { return d.year; },
 						function (d) { return d.categoryName; },
 						function (d) { return d.lemurs_quantity; },
 						function (d) { return d.location_admin2_chart; },
