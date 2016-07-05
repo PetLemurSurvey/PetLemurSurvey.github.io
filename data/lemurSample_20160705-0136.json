@@ -1,0 +1,1215 @@
+{
+"kobo_data": [
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2011-06-01",
+"lemur_category": null,
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1997-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2007-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2000-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1998-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2000-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2003-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2003-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1996-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2011-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2010-06-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": null,
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 5,
+"month_and_year": "2011-06-01",
+"lemur_category": null,
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2005-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2000-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": null,
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": null,
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 4,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": null,
+"month_and_year": "2001-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2002-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1993-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 4,
+"month_and_year": "2010-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1993-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1990-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2006-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "itasy"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2002-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "boeny"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toliara",
+"location_admin2": "atsimo-andrefana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2004-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2002-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1998-06-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1982-06-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "alaotra-mangoro"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1990-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1980-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2011-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1995-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1985-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "fianarantsoa",
+"location_admin2": "haute_matsiatra"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toliara",
+"location_admin2": "atsimo-andrefana"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "vakinankaratra"
+},
+{
+"lemurs_quantity": 5,
+"month_and_year": "2000-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2000-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1990-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "vakinankaratra"
+},
+{
+"lemurs_quantity": 6,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "fianarantsoa",
+"location_admin2": "vatovavy-fitovinany"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1980-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 4,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toliara",
+"location_admin2": "atsimo-andrefana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "1999-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antananarivo",
+"location_admin2": "analamanga"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1995-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "fianarantsoa",
+"location_admin2": "amoron.i_mania"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1980-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toliara",
+"location_admin2": "menabe"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 10,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2011-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": null,
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2006-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 4,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2008-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1993-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2003-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 6,
+"month_and_year": "2010-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "fianarantsoa",
+"location_admin2": "atsimo-atsinanana"
+},
+{
+"lemurs_quantity": 6,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2007-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": null,
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1999-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2000-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toliara",
+"location_admin2": "atsimo-andrefana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2003-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 6,
+"month_and_year": "2001-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2005-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2016-03-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": null,
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2013-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2011-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2005-01-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "1975-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "1969-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "1989-06-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": "antsiranana",
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1992-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": null,
+"lemur_category": "brown_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 4,
+"month_and_year": "2010-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "antananarivo",
+"location_admin2": "vakinankaratra"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "sofia"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "1993-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "1980-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 5,
+"month_and_year": "2005-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2007-06-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "diana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 6,
+"month_and_year": null,
+"lemur_category": "indri",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-06-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-01-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "betsiboka"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2016-05-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": "toliara",
+"location_admin2": "atsimo-andrefana"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2015-02-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-02-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-03-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-05-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-02-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": "toamasina",
+"location_admin2": "analanjirofo"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-02-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-09-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-05-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-11-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2011-03-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2011-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2011-06-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2008-12-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2008-05-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-12-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-05-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2015-08-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2008-11-01",
+"lemur_category": "mouse_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-01-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "analanjirofo"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-02-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-07-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-11-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-06-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-02-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-02-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "alaotra-mangoro"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-06-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-03-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-02-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-07-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-10-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-05-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-12-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2008-02-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2014-01-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-12-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-05-01",
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-01-01",
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2008-02-01",
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2016-03-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-04-01",
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-08-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": "fianarantsoa",
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2012-06-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2010-01-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "atsinanana"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2009-07-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2008-12-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2011-07-01",
+"lemur_category": "I_dont_remembe",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2016-04-01",
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2016-03-01",
+"lemur_category": "ruffed_lemurs",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 5,
+"month_and_year": "2016-02-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "alaotra-mangoro"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2016-01-01",
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2015-12-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toamasina",
+"location_admin2": "alaotra-mangoro"
+},
+{
+"lemurs_quantity": null,
+"month_and_year": "2011-12-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": null,
+"month_and_year": "2015-02-01",
+"lemur_category": "ring-tailed_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": null,
+"month_and_year": null,
+"lemur_category": null,
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": null,
+"lemur_category": "ruffed_lemurs",
+"location_admin1": "mahajanga",
+"location_admin2": null
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": null,
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2016-03-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2013-11-01",
+"lemur_category": "bamboo_lemur",
+"location_admin1": "toliara",
+"location_admin2": "anosy"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2014-10-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "mahajanga",
+"location_admin2": "boeny"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2015-01-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "antananarivo",
+"location_admin2": "itasy"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2014-09-01",
+"lemur_category": "brown_lemur",
+"location_admin1": null,
+"location_admin2": null
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": null,
+"lemur_category": "brown_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "sava"
+},
+{
+"lemurs_quantity": 2,
+"month_and_year": "2013-06-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "sava"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2010-05-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "toliara",
+"location_admin2": "atsimo-andrefana"
+},
+{
+"lemurs_quantity": 3,
+"month_and_year": "2001-06-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "sava"
+},
+{
+"lemurs_quantity": 6,
+"month_and_year": "2013-06-01",
+"lemur_category": "brown_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "sava"
+},
+{
+"lemurs_quantity": 1,
+"month_and_year": "2014-06-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "sava"
+},
+{
+"lemurs_quantity": 4,
+"month_and_year": "2013-06-01",
+"lemur_category": "dwarf_lemur",
+"location_admin1": "antsiranana",
+"location_admin2": "sava"
+}
+]
+}
