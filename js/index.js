@@ -12,7 +12,7 @@ var admin2_KV,
 	// 	}).addTo(map);
 
 
-	d3.json('data/lemurSample_20160706-1657.json', function(error, data) {
+	d3.json('https://lemursurvey.herokuapp.com/', function(error, data) {
 
 		// key/values for codes returned from API source
 		month_KV = {
@@ -173,7 +173,7 @@ var admin2_KV,
 			"no_response":"No response",
 			"other":"Other"
 		}
-		var lemurData = data.kobo_data;
+		var lemurData = data.responses;
 		var fullDateFormat = d3.time.format('%Y-%m-%d');
 		var yearFormat = d3.time.format('%Y');
 		var monthFormat = d3.time.format('%b'); 
