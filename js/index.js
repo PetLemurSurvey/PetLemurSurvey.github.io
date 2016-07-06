@@ -12,7 +12,7 @@ var admin2_KV,
 	// 	}).addTo(map);
 
 
-	d3.json('data/lemurSample_20160705-2347.json', function(error, data) {
+	d3.json('data/lemurSample_20160706-1657.json', function(error, data) {
 
 		// key/values for codes returned from API source
 		month_KV = {
