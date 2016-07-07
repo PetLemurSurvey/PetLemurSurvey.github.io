@@ -1,7 +1,14 @@
 
 var admin2_KV, 
 		admin1_KV,
-		lemur_category_KV
+		lemur_category_KV,
+		row1_height,
+		row2_height,
+		map_height,
+		map_width,
+		item_width,
+		rowChartBarColor	
+		// rowchartcolors
 
 	// var map = L.map('map');
 	// var breweryMarkers = new L.FeatureGroup();
@@ -12,11 +19,11 @@ var admin2_KV,
 	// 	}).addTo(map);
 
 
-	d3.json('https://lemursurvey.herokuapp.com/', function(error, data) {
-
+//sample data
+	d3.json('data/lemurSample_20160706-1657.json', function(error, data) {
 		// key/values for codes returned from API source
 		month_KV = {
-			"no_response":"No response",
+			// "no_response":"No response",
 			"i_dont_know":"I dont know",
 			"january":"Jan",
 			"february":"Feb",
@@ -185,9 +192,6 @@ var admin2_KV,
 			d.categoryName = lemur_category_KV[d.lemur_category];
 			d.month = month_KV[d.month];
 			d.year = year_KV[d.year];
-			// d.when_seen_dt = fullDateFormat.parse(d.month_and_year);
-			// d.when_seen_year = yearFormat(d.when_seen_dt);
-			// d.when_seen_month = monthFormat(d.when_seen_dt);
 			d.location_admin1_chart = admin1_KV[d.location_admin1];
 			d.location_admin1_map = d.location_admin1;
 			d.location_admin2_chart = admin2_KV[d.location_admin2];
@@ -234,34 +238,36 @@ var admin2_KV,
 				dataTable = dc.dataTable('#data-table');
 
 
-
+		//set up maps
 		d3.json("data/mdg_admin1.json", function(admin1JSON) {
 				d3.json("data/mdg_admin2.json", function(admin2JSON){
 
-				console.log(admin1JSON, admin2JSON)
-				var width = 300;
-				var height = 450
+				row1_height = 200;
+				row2_height = 400;
+				item_width = 300
+				map_width = item_width;
+				map_height = row2_height;
+				rowChartBarColor = "#3182BD"; //3182BD	
+
 				var projection = d3.geo.mercator();
 				var path = d3.geo.path().projection(projection);
 				
-
 				//set up scale and translate
 				var bounds, scale, offset;
 				projection.scale(1).translate([0,0]);
 				var bounds = path.bounds(admin1JSON);
-				var scale = .95 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
-				var offset = [(width - scale * (bounds[1][0] + bounds[0][0])) /2, (height - scale * (bounds[1][1] + bounds[0][1])) /2 ]; 
+				var scale = .95 / Math.max((bounds[1][0] - bounds[0][0]) / map_width, (bounds[1][1] - bounds[0][1]) / map_height);
+				var offset = [(map_width - scale * (bounds[1][0] + bounds[0][0])) /2, (map_height - scale * (bounds[1][1] + bounds[0][1])) /2 ]; 
 				projection.scale(scale).translate(offset);
 
-
-
-			////chart configuration
+			////chart configuration.  must be under map data import and set up.
 				admin1Map
-					.width(width)
-					.height(height)
+					.width(map_width)
+					.height(map_height)
 					.dimension(admin1MapDim)
 					.group(admin1MapGroup)
-					.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+					.colors(d3.scale.quantize().range(colorbrewer.Blues[7]))
+					// .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
 	        .colorDomain([0, 200])
 	        .colorCalculator(function (d) { return d ? admin1Map.colors()(d) : '#ccc'; })
 					.projection(projection)
@@ -269,13 +275,15 @@ var admin2_KV,
 						function(d) {
 							return d.properties.code;
 						})
+					;
 
 				admin2Map
-				.width(width)
-				.height(height)
+				.width(map_width)
+				.height(map_height)
 				.dimension(admin2MapDim)
 				.group(admin2MapGroup)
-				.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+				.colors(d3.scale.quantize().range(colorbrewer.Blues[7]))
+				// .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
         .colorDomain([0, 200])
         .colorCalculator(function (d) { return d ? admin2Map.colors()(d) : '#ccc'; })
 				.projection(projection)
@@ -283,18 +291,19 @@ var admin2_KV,
 					function(d) {
 						return d.properties.code_adm2;
 					})
+				;
 
-				//circle charts
+				//other charts
 				yearChart
-					.width(150)
-					.height(150)
+					.width(row1_height)
+					.height(row1_height)
 					.dimension(yearDim)
 					.group(countPerYear)
 					.innerRadius(20);
 
 				monthChart
-					.width(150)
-					.height(150)
+					.width(row1_height)
+					.height(row1_height)
 					.dimension(monthDim)
 					.group(countPerMonth)
 					.innerRadius(20)
@@ -303,46 +312,50 @@ var admin2_KV,
 							'Jan':1,'Feb':2,'Mar':3,'Apr':4,'May':5,'Jun':6,'Jul':7,'Aug':8,'Sep':9,'Oct':10,'Nov':11,'Dec':12
 						};
 						return order[d.key];
-					});
+					})
+				;
 
 				categoryChart
-					.width(300)
-					.height(450)
+					.width(item_width)
+					.height(row1_height)
 					.dimension(categoryNameDim)
 					.group(categoryGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
-					// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
+					.colors(rowChartBarColor)
+				;
 
 				admin1Chart
-					.width(300)
-					.height(150)
+					.width(item_width)
+					.height(row2_height)
 					.dimension(admin1ChartDim)
 					.group(admin1ChartGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
-					// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
+					.colors(rowChartBarColor)
 					.ordering(function(d){
 						var order = {			
 							"Antananarivo":1,"Antsiranana":2,"Fianarantsoa":3,"Mahajanga":4,"Toamasina":5,"Toliara":6,"Other":7,"No response":8
 						};
 						return order[d.key];
-					});
+					})
+				;
 
 				admin2Chart
-					.width(300)
-					.height(150)
+					.width(item_width)
+					.height(row2_height)
 					.dimension(admin2ChartDim)
 					.group(admin2ChartGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
+					.colors(rowChartBarColor)
 					.ordering(function(d){
 						var order = {			
 							"Alaotra-Mangoro":1,"Amoron'I Mania":2,"Analamanga":3,"Analanjirofo":4,"Androy":5,"Anosy":6,"Atsimo-Andrefana":7,"Atsimo-Atsinanana":8,"Atsinanana":9,"Betsiboka":10,"Boeny":11,"Bongolava":12,"Diana":13,"Haute Matsiatra":14,"Ihorombe":15,"Itasy":16,"Melaky":17,"Menabe":18,"Sava":19,"Sofia":20,"Vakinankaratra":21,"Vatovavy-Fitovinany":22,"No Data":23, "Other":24, "No response":25
 						};
 						return order[d.key];
-					});
-
+					})
+				;
 
 				dataCount
 					.dimension(ndx)
