@@ -20,9 +20,9 @@ text {
   font-size: 16px;
 }
 
-#map {
-  height: 150px;
-}
+// #map {
+//   height: 150px;
+// }
 
 #control-row {
   padding-bottom: 20px;
@@ -33,3 +33,29 @@ a { cursor: pointer }
 .dc-chart g.row text {
     fill: black;
 }
+
+/*override dc.css*/
+.dc-chart g.row rect {
+    opacity: 0.6;
+}
+
+.dc-chart g.mdg_adm1 path {
+    stroke: white
+}
+
+.dc-chart g.mdg_adm2 path {
+    stroke: white
+}
+
+// div.tooltip {   
+//   position: absolute;           
+//   text-align: center;           
+//   width: 60px;                  
+//   height: 28px;                 
+//   padding: 2px;             
+//   font: 12px sans-serif;        
+//   background: lightsteelblue;   
+//   border: 0px;      
+//   border-radius: 8px;           
+//   pointer-events: none;         
+// }

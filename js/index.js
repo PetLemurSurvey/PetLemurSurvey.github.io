@@ -6,19 +6,16 @@ var admin2_KV,
 		row2_height,
 		map_height,
 		map_width,
-		item_width
-
-	// var map = L.map('map');
-	// var breweryMarkers = new L.FeatureGroup();
-
-	// L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	// 	maxZoom: 19,
-	// 	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-	// 	}).addTo(map);
+		item_width,
+		rowChartBarColor	
+		// rowchartcolors
 
 
-	d3.json('http://lemursurvey.herokuapp.com/', function(error, data) {
+//live data
+	// d3.json('http://lemursurvey.herokuapp.com/', function(error, data) {
 
+//sample data
+	d3.json('data/lemurSample_20160706-1657.json', function(error, data) {
 		// key/values for codes returned from API source
 		month_KV = {
 			"no_response":"No response",
@@ -37,7 +34,7 @@ var admin2_KV,
 			"december":"Dec"
 		};
 		year_KV = {
-			"no_response":"No response",
+			// "no_response":"No response",
 			"i_dont_know":"I don't know",
 			"2016":"2016",
 			"2015":"2015",
@@ -213,7 +210,6 @@ var admin2_KV,
 				admin2MapDim = ndx.dimension(function(d) {return d.location_admin2_map})
 				allDim = ndx.dimension(function(d) {return d;});
 
-
 		//creating groups (y-axis values)
 		var all = ndx.groupAll();
 		var countPerYear = yearDim.group().reduceCount(),
@@ -225,16 +221,17 @@ var admin2_KV,
 				admin2MapGroup = admin2MapDim.group().reduceCount();
 
 		//creating charts
-		var yearChart = dc.pieChart('#chart-ring-year'),
-				monthChart = dc.pieChart('#chart-ring-month'),
-				categoryChart = dc.rowChart("#chart_row_category")
-				admin1Chart = dc.rowChart("#chart_row_admin1")
-				admin2Chart = dc.rowChart("#chart_row_admin2")
-				admin1Map = dc.geoChoroplethChart("#map_admin1");
-				admin2Map = dc.geoChoroplethChart("#map_admin2");
+		// var yearChart = dc.pieChart('#chart_ring_year'),
+		var yearBarChart = dc.barChart('#chart_bar_year'),
+				monthBarChart = dc.barChart('#chart_bar_month'),
+				// monthChart = dc.pieChart('#chart_ring_month'),
+				categoryChart = dc.rowChart("#chart_row_category"),
+				admin1Chart = dc.rowChart("#chart_row_admin1"),
+				admin2Chart = dc.rowChart("#chart_row_admin2"),
+				admin1Map = dc.geoChoroplethChart("#map_admin1"),
+				admin2Map = dc.geoChoroplethChart("#map_admin2"),
 				dataCount = dc.dataCount('#data-count'),
 				dataTable = dc.dataTable('#data-table');
-
 
 		//set up maps
 		d3.json("data/mdg_admin1.json", function(admin1JSON) {
@@ -245,6 +242,8 @@ var admin2_KV,
 				item_width = 300
 				map_width = item_width;
 				map_height = row2_height;
+				rowChartBarColor = "#3182BD"; //3182BD	
+				var numberFormat = d3.format('.2f');
 
 				var projection = d3.geo.mercator();
 				var path = d3.geo.path().projection(projection);
@@ -258,26 +257,56 @@ var admin2_KV,
 				projection.scale(scale).translate(offset);
 
 			////chart configuration.  must be under map data import and set up.
+
 				admin1Map
 					.width(map_width)
 					.height(map_height)
 					.dimension(admin1MapDim)
 					.group(admin1MapGroup)
-					.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+					.colors(d3.scale.quantize().range(colorbrewer.Blues[7]))
+					// .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
 	        .colorDomain([0, 200])
 	        .colorCalculator(function (d) { return d ? admin1Map.colors()(d) : '#ccc'; })
 					.projection(projection)
+					// .on("renderlet", function(chart){
+					// 	chart.on("mouseover", tip.show)
+					// 	debugger;
+					// })
+					.on('filtered.monitor', function(chart, filter) {
+				    // report the filter applied
+					})
+				
+					// .renderlabel(true)
+					// .renderlet(function(chart){
+					// 	chart.on("mouseover", function(d) {      
+			    //    div.transition()        
+			    // .duration(200)      
+			    // .style("opacity", .9);      
+			    // div .html(admin1JSON.features)// + "<br/>"  + d.close)  
+			    // .style("left", (d3.event.pageX) + "px")     
+			    // .style("top", (d3.event.pageY - 28) + "px");    
+			    // })                  
+	        // .on("mouseout", function(d) {       
+	        //     div.transition()        
+	        //         .duration(500)      
+	        //         .style("opacity", 0);   
+	        // })
+		      //})
 					.overlayGeoJson(admin1JSON.features, "mdg_adm1",
 						function(d) {
 							return d.properties.code;
 						})
+					;
+
+
 
 				admin2Map
 				.width(map_width)
 				.height(map_height)
 				.dimension(admin2MapDim)
 				.group(admin2MapGroup)
-				.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+				.colors(d3.scale.quantize().range(colorbrewer.Blues[7]))
+				// .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
         .colorDomain([0, 200])
         .colorCalculator(function (d) { return d ? admin2Map.colors()(d) : '#ccc'; })
 				.projection(projection)
@@ -285,27 +314,102 @@ var admin2_KV,
 					function(d) {
 						return d.properties.code_adm2;
 					})
+				;
+
 
 				//other charts
-				yearChart
-					.width(row1_height)
-					.height(row1_height)
-					.dimension(yearDim)
-					.group(countPerYear)
-					.innerRadius(20);
+				// yearChart
+				// 	.width(row1_height)
+				// 	.height(row1_height)
+				// 	.dimension(yearDim)
+				// 	.group(countPerYear)
+				// 	// .legend(dc.legend().x(10).y(10).itemHeight(5).gap(5))
+				// 	// .renderTitle([true])
+				// 	// .title(function(d){
+				// 	// 	return d.key + "\n" + countPerYear + " observations"
+				// 	// })
+				// 	.innerRadius(20);
 
-				monthChart
-					.width(row1_height)
-					.height(row1_height)
-					.dimension(monthDim)
-					.group(countPerMonth)
-					.innerRadius(20)
-					.ordering(function(d){
-						var order = {
-							'Jan':1,'Feb':2,'Mar':3,'Apr':4,'May':5,'Jun':6,'Jul':7,'Aug':8,'Sep':9,'Oct':10,'Nov':11,'Dec':12
-						};
-						return order[d.key];
-					});
+				//I would like to replace yearChart and monthChart with bar charts. 
+
+				// monthChart
+				// 	.width(row1_height)
+				// 	.height(row1_height)
+				// 	.dimension(monthDim)
+				// 	.group(countPerMonth)
+				// 	.innerRadius(20)
+				// 	.on('renderlet',function(chart){
+				// 		debugger;
+				// 		chart.onClick(function(d){
+				// 			debugger;
+				// 			console.log(d);
+				// 		});
+				// 	})
+				// 	.ordering(function(d){
+				// 		var order = {
+				// 			'Jan':1,'Feb':2,'Mar':3,'Apr':4,'May':5,'Jun':6,'Jul':7,'Aug':8,'Sep':9,'Oct':10,'Nov':11,'Dec':12
+				// 		};
+				// 		return order[d.key];
+				// 	})
+				// ;
+
+					monthBarChart
+						.width(item_width*2)
+		        .height(row1_height/3)
+		        .margins({top: 10, right: 50, bottom: 30, left: 40})
+		        .dimension(monthDim)
+		        .group(countPerMonth)
+		        .elasticY(true)
+		        .centerBar(true)
+						// (optional) set gap between bars manually in px, default=2
+						.gap(1)
+						// (optional) set filter brush rounding
+		        .round(dc.round.floor)
+		        .alwaysUseRounding(true)
+		        .x(d3.scale.ordinal().domain(Object.keys(month_KV).map(function(d){return month_KV[d];})))
+		        .renderHorizontalGridLines(true)
+		        //.filterPrinter(function (filters) {
+		        //    var filter = filters[0], s = '';
+		        //    s += numberFormat(filter[0]) + '% -> ' + numberFormat(filter[1]) + '%';
+		          //  return s;
+		        //});
+						// Customize axes
+
+ 
+					    // monthBarChart.xAxis().tickFormat(
+					    //     // function (v) { return v + '%'; });
+					    //     function (v) { return v; });
+					    // monthBarChart.yAxis().ticks(5);
+
+					yearBarChart
+						.width(item_width*2)
+		        .height(row1_height/3)
+		        .margins({top: 10, right: 50, bottom: 30, left: 40})
+		        .dimension(yearDim)
+		        .group(countPerYear)
+		        .elasticY(true)
+		        .centerBar(true)
+						// (optional) set gap between bars manually in px, default=2
+						.gap(1)
+						// (optional) set filter brush rounding
+		        .round(dc.round.floor)
+		        .alwaysUseRounding(true)
+		        .x(d3.scale.ordinal().domain(Object.keys(year_KV).map(function(d){return year_KV[d];})))
+		        .renderHorizontalGridLines(true)
+		        //.filterPrinter(function (filters) {
+		        //    var filter = filters[0], s = '';
+		        //    s += numberFormat(filter[0]) + '% -> ' + numberFormat(filter[1]) + '%';
+		          //  return s;
+		        //});
+						// Customize axes
+
+ 
+					    // monthBarChart.xAxis().tickFormat(
+					    //     // function (v) { return v + '%'; });
+					    //     function (v) { return v; });
+					    // monthBarChart.yAxis().ticks(5);
+
+
 
 				categoryChart
 					.width(item_width)
@@ -314,6 +418,8 @@ var admin2_KV,
 					.group(categoryGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
+					.colors(rowChartBarColor)
+				;
 
 				admin1Chart
 					.width(item_width)
@@ -322,12 +428,14 @@ var admin2_KV,
 					.group(admin1ChartGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
+					.colors(rowChartBarColor)
 					.ordering(function(d){
 						var order = {			
 							"Antananarivo":1,"Antsiranana":2,"Fianarantsoa":3,"Mahajanga":4,"Toamasina":5,"Toliara":6,"Other":7,"No response":8
 						};
 						return order[d.key];
-					});
+					})
+				;
 
 				admin2Chart
 					.width(item_width)
@@ -336,13 +444,14 @@ var admin2_KV,
 					.group(admin2ChartGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
+					.colors(rowChartBarColor)
 					.ordering(function(d){
 						var order = {			
 							"Alaotra-Mangoro":1,"Amoron'I Mania":2,"Analamanga":3,"Analanjirofo":4,"Androy":5,"Anosy":6,"Atsimo-Andrefana":7,"Atsimo-Atsinanana":8,"Atsinanana":9,"Betsiboka":10,"Boeny":11,"Bongolava":12,"Diana":13,"Haute Matsiatra":14,"Ihorombe":15,"Itasy":16,"Melaky":17,"Menabe":18,"Sava":19,"Sofia":20,"Vakinankaratra":21,"Vatovavy-Fitovinany":22,"No Data":23, "Other":24, "No response":25
 						};
 						return order[d.key];
-					});
-
+					})
+				;
 
 				dataCount
 					.dimension(ndx)
@@ -367,17 +476,6 @@ var admin2_KV,
 						//each time table is rendered remove extra row dc.js insists on adding
 						table.select('tr.dc-table-group').remove();
 
-			// Map markers
-		      // breweryMarkers.clearLayers();
-		      // _.each(allDim.top(Infinity), function (d) {
-		      //   var loc = d.brewery.location;
-		      //   var name = d.brewery.brewery_name;
-		      //   var marker = L.marker([loc.lat, loc.lng]);
-		      //   marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
-		      //   breweryMarkers.addLayer(marker);
-		      // });
-		      // map.addLayer(breweryMarkers);
-		      // map.fitBounds(breweryMarkers.getBounds());
 		    });
 
 
@@ -389,8 +487,12 @@ var admin2_KV,
 				yearChart.filterAll();
 				dc.redrawAll();
 			});
+			// d3.selectAll('a#month').on('click', function() {
+			// 	monthChart.filterAll();
+			// 	dc.redrawAll();
+			// });
 			d3.selectAll('a#month').on('click', function() {
-				monthChart.filterAll();
+				monthBarChart.filterAll();
 				dc.redrawAll();
 			});
 			d3.selectAll('a#admin1_chart').on('click', function() {
@@ -414,7 +516,7 @@ var admin2_KV,
 				dc.redrawAll();
 			});
 
-
+			// dc.tooltipMixin(yearChart);
 
 			dc.renderAll();
 			// d3.select(self.frameElement).style("height", height + "px");
