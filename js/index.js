@@ -1,7 +1,12 @@
 
 var admin2_KV, 
 		admin1_KV,
-		lemur_category_KV
+		lemur_category_KV,
+		row1_height,
+		row2_height,
+		map_height,
+		map_width,
+		item_width
 
 	// var map = L.map('map');
 	// var breweryMarkers = new L.FeatureGroup();
@@ -12,7 +17,7 @@ var admin2_KV,
 	// 	}).addTo(map);
 
 
-	d3.json('data/lemurSample_20160706-1657.json', function(error, data) {
+	d3.json('http://lemursurvey.herokuapp.com/', function(error, data) {
 
 		// key/values for codes returned from API source
 		month_KV = {
@@ -173,7 +178,7 @@ var admin2_KV,
 			"no_response":"No response",
 			"other":"Other"
 		}
-		var lemurData = data.kobo_data;
+		var lemurData = data.responses;
 		var fullDateFormat = d3.time.format('%Y-%m-%d');
 		var yearFormat = d3.time.format('%Y');
 		var monthFormat = d3.time.format('%b'); 
@@ -185,9 +190,6 @@ var admin2_KV,
 			d.categoryName = lemur_category_KV[d.lemur_category];
 			d.month = month_KV[d.month];
 			d.year = year_KV[d.year];
-			// d.when_seen_dt = fullDateFormat.parse(d.month_and_year);
-			// d.when_seen_year = yearFormat(d.when_seen_dt);
-			// d.when_seen_month = monthFormat(d.when_seen_dt);
 			d.location_admin1_chart = admin1_KV[d.location_admin1];
 			d.location_admin1_map = d.location_admin1;
 			d.location_admin2_chart = admin2_KV[d.location_admin2];
@@ -234,31 +236,31 @@ var admin2_KV,
 				dataTable = dc.dataTable('#data-table');
 
 
-
+		//set up maps
 		d3.json("data/mdg_admin1.json", function(admin1JSON) {
 				d3.json("data/mdg_admin2.json", function(admin2JSON){
 
-				console.log(admin1JSON, admin2JSON)
-				var width = 300;
-				var height = 450
+				row1_height = 200;
+				row2_height = 400;
+				item_width = 300
+				map_width = item_width;
+				map_height = row2_height;
+
 				var projection = d3.geo.mercator();
 				var path = d3.geo.path().projection(projection);
 				
-
 				//set up scale and translate
 				var bounds, scale, offset;
 				projection.scale(1).translate([0,0]);
 				var bounds = path.bounds(admin1JSON);
-				var scale = .95 / Math.max((bounds[1][0] - bounds[0][0]) / width, (bounds[1][1] - bounds[0][1]) / height);
-				var offset = [(width - scale * (bounds[1][0] + bounds[0][0])) /2, (height - scale * (bounds[1][1] + bounds[0][1])) /2 ]; 
+				var scale = .95 / Math.max((bounds[1][0] - bounds[0][0]) / map_width, (bounds[1][1] - bounds[0][1]) / map_height);
+				var offset = [(map_width - scale * (bounds[1][0] + bounds[0][0])) /2, (map_height - scale * (bounds[1][1] + bounds[0][1])) /2 ]; 
 				projection.scale(scale).translate(offset);
 
-
-
-			////chart configuration
+			////chart configuration.  must be under map data import and set up.
 				admin1Map
-					.width(width)
-					.height(height)
+					.width(map_width)
+					.height(map_height)
 					.dimension(admin1MapDim)
 					.group(admin1MapGroup)
 					.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
@@ -271,8 +273,8 @@ var admin2_KV,
 						})
 
 				admin2Map
-				.width(width)
-				.height(height)
+				.width(map_width)
+				.height(map_height)
 				.dimension(admin2MapDim)
 				.group(admin2MapGroup)
 				.colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
@@ -284,17 +286,17 @@ var admin2_KV,
 						return d.properties.code_adm2;
 					})
 
-				//circle charts
+				//other charts
 				yearChart
-					.width(150)
-					.height(150)
+					.width(row1_height)
+					.height(row1_height)
 					.dimension(yearDim)
 					.group(countPerYear)
 					.innerRadius(20);
 
 				monthChart
-					.width(150)
-					.height(150)
+					.width(row1_height)
+					.height(row1_height)
 					.dimension(monthDim)
 					.group(countPerMonth)
 					.innerRadius(20)
@@ -306,22 +308,20 @@ var admin2_KV,
 					});
 
 				categoryChart
-					.width(300)
-					.height(450)
+					.width(item_width)
+					.height(row1_height)
 					.dimension(categoryNameDim)
 					.group(categoryGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
-					// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
 
 				admin1Chart
-					.width(300)
-					.height(150)
+					.width(item_width)
+					.height(row2_height)
 					.dimension(admin1ChartDim)
 					.group(admin1ChartGroup)
 					.elasticX(true)
 					.margins({top: 10, left: 20, right: 10, bottom: 20})
-					// .xAxis().tickValues([0, 1, 2, 3, 4, 5]);
 					.ordering(function(d){
 						var order = {			
 							"Antananarivo":1,"Antsiranana":2,"Fianarantsoa":3,"Mahajanga":4,"Toamasina":5,"Toliara":6,"Other":7,"No response":8
@@ -330,8 +330,8 @@ var admin2_KV,
 					});
 
 				admin2Chart
-					.width(300)
-					.height(150)
+					.width(item_width)
+					.height(row2_height)
 					.dimension(admin2ChartDim)
 					.group(admin2ChartGroup)
 					.elasticX(true)

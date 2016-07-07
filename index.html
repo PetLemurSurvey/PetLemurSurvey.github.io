@@ -28,22 +28,27 @@
 
 <!-- month/year circle filteres, Regions and Provinces bar charts -->
   <div class="row" id="control-row">
-    <div class="col-xs-2 pie-chart">
+    <div class="col-xs-3 pie-chart">
       <h4>Year <small><a id="year">reset</a></small></h4>
       <div class="dc-chart" id="chart-ring-year"></div>
     </div>
-    <div class="col-xs-2 pie-chart">
+    <div class="col-xs-3 pie-chart">
       <h4>Month <small><a id="month" href="#">reset</a></small></h4>
       <div class="dc-chart" id="chart-ring-month"></div>
     </div>
-    <div class="col-xs-4">
+
+    <div class="col-md-6">
+	    <h4>Category <small><a id="category" href="#">reset</a></small></h4>
+      <div class="dc-chart" id="chart_row_category"></div>
+    </div>
+<!--     <div class="col-xs-4">
       <h4>Regions <small><a id="admin2_chart" href="#">reset</a></small></h4>
       <div id="chart_row_admin2"></div>
     </div>
 		<div class="col-xs-4">
       <h4>Provinces <small><a id="admin1_chart" href="#">reset</a></small></h4>
       <div id="chart_row_admin1"></div>
-    </div>
+    </div> -->
 		<!-- 
     <div class="col-xs-6">
       <h4>Breweries</h4>
@@ -54,20 +59,35 @@
 
   <!-- categories, and maps (admin2 and admin1) -->
   <div class="row">
-    <div class="col-md-4">
-    <h4>Category <small><a id="category" href="#">reset</a></small></h4>
-    <!-- <div class="col-xs-6 col-md-4"> -->
-      <div class="dc-chart" id="chart_row_category"></div>
+
+  <!--     <div class="col-md-4">
+      <h4>Category <small><a id="category" href="#">reset</a></small></h4>
+        <div class="dc-chart" id="chart_row_category"></div>
+      </div> -->
+    <div>
+      <!-- <div class="col-md-1"></div> -->
+      <div class="col-xs-3 col-md-3">
+        <h4>Regions <small><a id="admin2_chart" href="#">reset</a></small></h4>
+        <div id="chart_row_admin2"></div>
+      </div>
+      <div class="col-xs-3 col-md-3">
+      <h4>Map:  Regions <small><a id="admin2_map" href="#">reset</a></small></h4>
+        <div id="map_admin2"></div>
+      </div>
     </div>
-    <!-- <div class="col-xs-6 col-md-4"> -->
-    <div class="col-md-4">
-    <h4>Map:  Regions <small><a id="admin2_map" href="#">reset</a></small></h4>
-      <div id="map_admin2"></div>
-    </div>
-    <!-- <div class="col-xs-6 col-md-4"> -->
-    <div class="col-md-4">
-    <h4>Map:  Provinces <small><a id="admin1_map" href="#">reset</a></small></h4>
-      <div id="map_admin1"></div>
+    <!-- <div class="col-md-1"></div> -->
+    <div>
+      <div class="col-xs-3 col-md-3">
+        <h4>Provinces <small><a id="admin1_chart" href="#">reset</a></small></h4>
+        <div id="chart_row_admin1"></div>
+      </div>
+      <!-- <div class="col-xs-6 col-md-4"> -->
+      <!-- <div class="col-xs-6 col-md-4"> -->
+      <div class="col-xs-3 col-md-3">
+      <h4>Map:  Provinces <small><a id="admin1_map" href="#">reset</a></small></h4>
+        <div id="map_admin1"></div>
+      </div>
+      <!-- <div class="col-md-1"></div> -->
     </div>
   </div>
   <br>

@@ -29,3 +29,7 @@ text {
 }
 
 a { cursor: pointer }
+
+.dc-chart g.row text {
+    fill: black;
+}
