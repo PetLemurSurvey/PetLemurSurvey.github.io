@@ -1,10 +1,3 @@
-// function myD3(args) {
-//   // call d3's json, passing through any arguments that were
-//   // passed into myJson(), and then set the headers you want
-//   return d3.json.apply(null, arguments)
-//     .header('X-Requested-With', 'XMLHttpRequest', 'Access-Control-Allow-Origin' );
-// }
-
 var admin2_KV, 
 		admin1_KV,
 		lemur_category_KV,
@@ -16,8 +9,6 @@ var admin2_KV,
 		rowChartBarColor	
 
 //import data from survey, and provide values for codes returned from API ("KV" = key/value)
-	// d3.json('http://cors.io/?u=http://lemursurvey.herokuapp.com/', function(error, data) {
-
 
 	d3.json('http://cors.io/?u=https://lemursurvey.herokuapp.com/', function(error, data) {		
 		month_KV = {
@@ -131,7 +122,7 @@ var admin2_KV,
 					.height(map_height)
 					.dimension(admin1MapDim)
 					.group(admin1MapGroup)
-					.colors(d3.scale.quantize().range(colorbrewer.Blues[7]))
+					.colors(d3.scale.quantize().range(colorbrewer.Blues[9]))
 					// .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
 	        .colorDomain([0, 200])
 	        .colorCalculator(function (d) { return d ? admin1Map.colors()(d) : '#ccc'; })
@@ -147,7 +138,7 @@ var admin2_KV,
 				.height(map_height)
 				.dimension(admin2MapDim)
 				.group(admin2MapGroup)
-				.colors(d3.scale.quantize().range(colorbrewer.Blues[7]))
+				.colors(d3.scale.quantize().range(colorbrewer.Blues[9]))
 				// .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
         .colorDomain([0, 200])
         .colorCalculator(function (d) { return d ? admin2Map.colors()(d) : '#ccc'; })
