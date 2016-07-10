@@ -10,7 +10,7 @@ var admin2_KV,
 
 //import data from survey, and provide values for codes returned from API ("KV" = key/value)
 
-	d3.json('http://cors.io/?u=https://lemursurvey.herokuapp.com/', function(error, data) {		
+	d3.json('https://cors.io/?u=https://lemursurvey.herokuapp.com/', function(error, data) {		
 		month_KV = {
 			"no_response":"No response",
 			"i_dont_know":"I dont know",
@@ -291,4 +291,5 @@ var admin2_KV,
 		});
 	});
 
-});
+})
+.header('Access-Control-Allow-Origin',"*");
