@@ -9,8 +9,9 @@ var admin2_KV,
 		rowChartBarColor	
 
 //import data from survey, and provide values for codes returned from API ("KV" = key/value)
-
-	d3.json('https://cors.io/?u=https://lemursurvey.herokuapp.com/', function(error, data) {		
+		
+	d3.json('https://lemursurvey.herokuapp.com/', function(error, data) {		
+	// d3.json('http://localhost:3000', function(error, data) {		
 		month_KV = {
 			"no_response":"No response",
 			"i_dont_know":"I dont know",
@@ -20,8 +21,8 @@ var admin2_KV,
 			"no_response":"No response",
 			"i_dont_know":"I don't know",
 			"2016":"2016","2015":"2015","2014":"2014","2013":"2013","2012":"2012","2011":"2011","2010":"2010","2009":"2009","2008":"2008","2007":"2007","2006":"2006","2005":"2005","2004":"2004","2003":"2003","2002":"2002","2001":"2001","2000":"2000","1999":"1999","1998":"1998","1997":"1997","1996":"1996","1995":"1995","1994":"1994","1993":"1993","1992":"1992","1991":"1991","1990":"1990","1989":"1989","1988":"1988","1987":"1987","1986":"1986","1985":"1985","1984":"1984","1983":"1983","1982":"1982","1981":"1981","1980":"1980","1979":"1979","1978":"1978","1977":"1977","1976":"1976","1975":"1975","1974":"1974","1973":"1973","1972":"1972","1971":"1971","1970":"1970","1969":"1969","1968":"1968","1967":"1967","1966":"1966","1965":"1965","1964":"1964","1963":"1963","1962":"1962","1961":"1961","1960":"1960"
-			// ,
-			// "before_1960":"before 1960",
+			,
+			"before_1960":"before 1960",
 		};
 		quantity_KV = {
 			"no_answer":"No response",
@@ -235,18 +236,6 @@ var admin2_KV,
 					.on('renderlet', function (table) {
 						//each time table is rendered remove extra row dc.js insists on adding
 						table.select('tr.dc-table-group').remove();
-
-			// Map markers
-		      // breweryMarkers.clearLayers();
-		      // _.each(allDim.top(Infinity), function (d) {
-		      //   var loc = d.brewery.location;
-		      //   var name = d.brewery.brewery_name;
-		      //   var marker = L.marker([loc.lat, loc.lng]);
-		      //   marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
-		      //   breweryMarkers.addLayer(marker);
-		      // });
-		      // map.addLayer(breweryMarkers);
-		      // map.fitBounds(breweryMarkers.getBounds());
 		    });
 
 
@@ -292,4 +281,5 @@ var admin2_KV,
 	});
 
 })
-.header('Access-Control-Allow-Origin',"*");
+.header('Access-Control-Allow-Origin',"*")
+;
