@@ -94,8 +94,8 @@ d3.json('https://lemursurvey.herokuapp.com/', function(error, data) {
 
 
 	//set up maps
-	d3.json("data/mdg_admin1.json", function(admin1JSON) {
-		d3.json("data/mdg_admin2.json", function(admin2JSON){
+	d3.json("data/mg_admin1.json", function(admin1JSON) {
+		d3.json("data/mg_admin2.json", function(admin2JSON){
 
 			row1_height = 200;
 			row2_height = 400;
