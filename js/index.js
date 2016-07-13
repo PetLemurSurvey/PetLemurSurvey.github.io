@@ -1,3 +1,24 @@
+// $.ajax({
+//   type: 'GET',
+//   url: "https://lemursurvey.herokuapp.com/",
+//   data: [],
+//   beforeSend: function(XMLHttpRequest)
+//   {
+//     XMLHttpRequest.addEventListener("progress", function(evt){
+//       if (evt.lengthComputable) {  
+//         var percentComplete = evt.loaded / evt.total;
+//         // console.log(percentComplete);
+//         //Do something with download progress
+//       }
+//     }, false); 
+//   },
+//   success: function(data){
+//     //Do something success-ish
+//   }
+// });
+
+
+
 var admin2_KV, 
 		admin1_KV,
 		lemur_category_KV,
@@ -8,10 +29,48 @@ var admin2_KV,
 		item_width,
 		rowChartBarColor	
 
+
 //import data from survey, and provide values for codes returned from API ("KV" = key/value)
 		
-	d3.json('https://lemursurvey.herokuapp.com/', function(error, data) {		
+	// var d3Data = function () {
+
+
+		// d3.request("https://lemursurvey.herokuapp.com/")
+  //   .mimeType("application/json")
+  //   .response(function(xhr) { return JSON.parse(xhr.responseText); })
+  //   .get(callback);
+
+// var loadingGIF = document.getElementsByClassName('loading');
+  
+
+// function openModal() {
+// 	// document.getElementsByClassName("loading");
+// 	// loadingGIF.style.visibility = 'visible';
+// 	// loadingGIF.display= ["none"];
+
+//         // document.getElementById('modal').style.display = 'block';
+//         // document.getElementById('fade').style.display = 'block';
+// }
+
+// function closeModal() {
+// 	// loadingGIF.style.visibility = 'hidden';
+// 	loadingGIF.style.display = 'none'
+//     // document.getElementById('modal').style.display = 'none';
+//     // document.getElementById('fade').style.display = 'none';
+// }
+       
+// d3.select('.loading').style("display", "visible");
+
+// d3.select('.spinner').style("display", "visible");
+
+
+// openModal();
+
+		d3.json('https://lemursurvey.herokuapp.com/', function(error, data) {		
+
 	// d3.json('http://localhost:3000', function(error, data) {		
+		// var callback = function(error, data) {		
+
 		month_KV = {
 			"no_response":"No response",
 			"i_dont_know":"I dont know",
@@ -273,13 +332,19 @@ var admin2_KV,
 			});
 
 
+			d3.select('.spinner').style("display", "none");
 
 			dc.renderAll();
 			// d3.select(self.frameElement).style("height", height + "px");
-
+			// closeModal();
+			// d3.select('.loading').style("color", "red");
+			// d3.select('.loading').style("display", "none");
 		});
 	});
 
 })
-.header('Access-Control-Allow-Origin',"*")
+// .on("beforesend", function() {
+// 	$('#loading').html('<img src="http://preloaders.net/preloaders/287/Filling%20broken%20ring.gif"> loading...');
+// }
+// };
 ;
