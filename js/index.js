@@ -9,7 +9,10 @@ var admin2_KV,
 		rowChartBarColor;
 
 
-d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {		
+// d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {		
+	d3.json('https://lemursurvey-staging.herokuapp.com/', function(error, data) {		
+	// d3.json('http://localhost:3000/', function(error, data) {		
+	
 	month_KV = {
 		"no_response":"No response",
 		"i_dont_know":"I dont know",
