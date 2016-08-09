@@ -5,13 +5,9 @@ var row1_height,
 		item_width,
 		rowChartBarColor;
 
-// d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {	
-d3.json('http://localhost:3000/', function(error, data) {		
-	// month_KV_digit = {
-	// 	"no_response":"No response",
-	// 	"i_dont_know":"I dont know",
-	// 	"january":"1","february":"2","march":"3","april":"4","may":"5","june":"6","july":"7","august":"8","september":"9","october":"10","november":"11","december":"12"
-	// };
+d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {	
+// d3.json('http://petlemursurvey-staging.herokuapp.com', function(error, data) {	
+// d3.json('http://localhost:3000/', function(error, data) {		
 
 	var lemurData = data.responses;
 	var fullDateFormat = d3.time.format('%Y-%m-%d');
@@ -28,7 +24,6 @@ d3.json('http://localhost:3000/', function(error, data) {
 		// d.month_digit= month_KV_digit[d.month];
 		d.year = year_KV[d.year];
 		d.decade = decade_KV[d.decade];
-		// d.year = d.year;
 		d.location_admin1_chart = admin1_KV[d.location_admin1];
 		d.location_admin1_map = d.location_admin1;
 		d.location_admin2_chart = admin2_KV[d.location_admin2];
