@@ -9,19 +9,35 @@ var admin2_KV,
 		rowChartBarColor;
 
 
-d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {		
-	month_KV = {
+// d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {	
+d3.json('http://localhost:3000/', function(error, data) {		
+	month_KV_digit = {
+		"no_response":"No response",
+		"i_dont_know":"I dont know",
+		"january":"1","february":"2","march":"3","april":"4","may":"5","june":"6","july":"7","august":"8","september":"9","october":"10","november":"11","december":"12"
+	};
+		month_KV_abbr = {
 		"no_response":"No response",
 		"i_dont_know":"I dont know",
 		"january":"Jan","february":"Feb","march":"Mar","april":"Apr","may":"May","june":"Jun","july":"July","august":"Aug","september":"Sept","october":"Oct","november":"Nov","december":"Dec"
 	};
+
+	decade_KV = {
+		"no_response":"No response",
+		"i_dont_know":"I don't know",
+		"1960's":"1960's","1970's":"1970's","1980's":"1980's","1990's":"1990's","2000's":"2000's",
+		"2010":"2010","2011":"2011","2012":"2012","2013":"2013","2014":"2014","2015":"2015","2016":"2016",
+		"before_1960":"before 1960"
+	};
+
 	year_KV = {
 		"no_response":"No response",
 		"i_dont_know":"I don't know",
-		"2016":"2016","2015":"2015","2014":"2014","2013":"2013","2012":"2012","2011":"2011","2010":"2010","2009":"2009","2008":"2008","2007":"2007","2006":"2006","2005":"2005","2004":"2004","2003":"2003","2002":"2002","2001":"2001","2000":"2000","1999":"1999","1998":"1998","1997":"1997","1996":"1996","1995":"1995","1994":"1994","1993":"1993","1992":"1992","1991":"1991","1990":"1990","1989":"1989","1988":"1988","1987":"1987","1986":"1986","1985":"1985","1984":"1984","1983":"1983","1982":"1982","1981":"1981","1980":"1980","1979":"1979","1978":"1978","1977":"1977","1976":"1976","1975":"1975","1974":"1974","1973":"1973","1972":"1972","1971":"1971","1970":"1970","1969":"1969","1968":"1968","1967":"1967","1966":"1966","1965":"1965","1964":"1964","1963":"1963","1962":"1962","1961":"1961","1960":"1960"
-		,
-		"before_1960":"before 1960",
+		"2016":"2016","2015":"2015","2014":"2014","2013":"2013","2012":"2012","2011":"2011","2010":"2010","2009":"2009","2008":"2008","2007":"2007","2006":"2006","2005":"2005","2004":"2004","2003":"2003","2002":"2002","2001":"2001","2000":"2000","1999":"1999","1998":"1998","1997":"1997","1996":"1996","1995":"1995","1994":"1994","1993":"1993","1992":"1992","1991":"1991","1990":"1990","1989":"1989","1988":"1988","1987":"1987","1986":"1986","1985":"1985","1984":"1984","1983":"1983","1982":"1982","1981":"1981","1980":"1980","1979":"1979","1978":"1978","1977":"1977","1976":"1976","1975":"1975","1974":"1974","1973":"1973","1972":"1972","1971":"1971","1970":"1970","1969":"1969","1968":"1968","1967":"1967","1966":"1966","1965":"1965","1964":"1964","1963":"1963","1962":"1962","1961":"1961","1960":"1960",
+		// ,
+		"before_1960":"before 1960"
 	};
+
 	quantity_KV = {
 		"no_answer":"No response",
 		"i_don_t_know":"I don't know",
@@ -47,8 +63,11 @@ d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {
 		d.count = +d.count;
 		d.lemurs_quantity = quantity_KV[d.lemurs_quantity];
 		d.categoryName = lemur_category_KV[d.lemur_category];
-		d.month = month_KV[d.month];
+		d.month_abbr = month_KV_abbr[d.month];
+		d.month_digit= month_KV_digit[d.month];
 		d.year = year_KV[d.year];
+		d.decade = decade_KV[d.decade];
+		// d.year = d.year;
 		d.location_admin1_chart = admin1_KV[d.location_admin1];
 		d.location_admin1_map = d.location_admin1;
 		d.location_admin2_chart = admin2_KV[d.location_admin2];
@@ -62,7 +81,9 @@ d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {
 	var quantityDim = ndx.dimension(function(d) {return d.lemurs_quantity}),
 			//dc.pluck:  short hand for same kind of anonymous function we used for yearDim
 			// monthDim = ndx.dimension(dc.pluck('when_seen_month')),
-			monthDim = ndx.dimension(function(d) {return d.month}),
+			monthDim_abbr = ndx.dimension(function(d) {return d.month_abbr}),
+			monthDim_digit = ndx.dimension(function(d) {return d.month_digit}),
+			decadeDim = ndx.dimension(function(d) {return d.decade}),
 			yearDim = ndx.dimension(function(d) {return d.year}),
 			categoryNameDim = ndx.dimension(function(d) {return d.categoryName;}),
 			admin1ChartDim = ndx.dimension(function(d) {return d.location_admin1_chart}),
@@ -73,8 +94,10 @@ d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {
 
 	//creating groups (y-axis values)
 	var all = ndx.groupAll();
-	var countPerYear = yearDim.group().reduceCount(),
-			countPerMonth = monthDim.group().reduceCount(),
+	var countPerDecade = decadeDim.group().reduceCount(),
+			countPerYear = yearDim.group().reduceCount(),
+			countPerMonth_abbr = monthDim_abbr.group().reduceCount(),
+			countPerMonth_digit = monthDim_digit.group().reduceCount(),
 			categoryGroup = categoryNameDim.group().reduceCount(),
 			admin1ChartGroup = admin1ChartDim.group().reduceCount(),
 			admin2ChartGroup = admin2ChartDim.group().reduceCount(),
@@ -152,15 +175,15 @@ d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {
 			yearChart
 				.width(row1_height)
 				.height(row1_height)
-				.dimension(yearDim)
-				.group(countPerYear)
+				.dimension(decadeDim)
+				.group(countPerDecade)
 				.innerRadius(20);
 
 			monthChart
 				.width(row1_height)
 				.height(row1_height)
-				.dimension(monthDim)
-				.group(countPerMonth)
+				.dimension(monthDim_abbr)
+				.group(countPerMonth_abbr)
 				.innerRadius(20)
 				.ordering(function(d){
 					var order = {
@@ -222,14 +245,14 @@ d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {
 				.group(function (d) { return 'dc.js insists on putting a row here so I remove it using js'; })
 				.size(100)
 				.columns([
-					function (d) { return d.month; },
+					function (d) { return d.month_abbr; },
 					function (d) { return d.year; },
 					function (d) { return d.categoryName; },
 					function (d) { return d.lemurs_quantity; },
 					function (d) { return d.location_admin2_chart; },
 					function (d) { return d.location_admin1_chart; },
 				])
-				.sortBy(function (d) { return d.month_and_year; })
+				.sortBy(function (d) { return d.month_abbr; })
 				.order(d3.descending)
 				.on('renderlet', function (table) {
 					// remove extra row dc.js insists on adding when table is rendered
