@@ -19,14 +19,14 @@ var decade_KV = {
 	},
 	month_KV_full = {
 		"no_response":"No response",
-		"i_dont_know":"I dont know",
+		"i_dont_know":"I don't know",
 		"january":"January","february":"Febuary","march":"March","april":"April","may":"May","june":"June","july":"July","august":"August","september":"September","october":"October","november":"November","december":"December"
 	},
 	quantity_KV = {
-		"no_answer":"No response",
 		"i_don_t_know":"I don't know",
+		"more_than_20":"21 or more",
+		"no_answer":"No response",
 		"1":"1","2":"2","3":"3","4":"4","5":"5","6":"6","7":"7","8":"8","9":"9","10":"10","11":"11","12":"12","13":"13","14":"14","15":"15","16":"16","17":"17","18":"18","19":"19","20":"20"
-		,"more_than_20":"21 or more"
 	},
 	admin1_KV = {
 		"antananarivo":"Antananarivo","antsiranana":"Antsiranana","fianarantsoa":"Fianarantsoa","mahajanga":"Mahajanga","toamasina":"Toamasina","toliara":"Toliara","other":"Other","no_response":"No response"
