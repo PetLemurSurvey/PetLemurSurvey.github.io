@@ -5,9 +5,8 @@ var row1_height,
 		item_width,
 		rowChartBarColor;
 
-// d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {	
-// d3.json('http://petlemursurvey-staging.herokuapp.com', function(error, data) {	
-d3.json('http://localhost:3000/', function(error, data) {		
+d3.json('https://petlemursurvey.herokuapp.com/', function(error, data) {	
+// d3.json('http://localhost:3000/', function(error, data) {		
 
 	var lemurData = data.responses;
 	var fullDateFormat = d3.time.format('%Y-%m-%d');
